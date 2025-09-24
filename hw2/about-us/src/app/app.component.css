@@ -1,0 +1,25 @@
+.about-container {
+    max-width: 700px;
+    margin: 40px auto;
+    padding: 30px;
+    border-radius: 12px;
+    background: #f8f9fa;
+    box-shadow: 0 4px 14px rgba(0,0,0,0.1);
+    font-family: Arial, sans-serif;
+    line-height: 1.6;
+  }
+  .about-container h1 {
+    margin-bottom: 10px;
+    color: #333;
+  }
+  .about-container h2 {
+    margin-top: 25px;
+    color: #555;
+  }
+  .about-container a {
+    color: #007acc;
+    text-decoration: none;
+  }
+  .about-container a:hover {
+    text-decoration: underline;
+  }
