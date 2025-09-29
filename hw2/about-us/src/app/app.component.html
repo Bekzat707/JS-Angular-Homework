@@ -1,13 +1,28 @@
 <div class="about-container">
-  <h1>About us</h1>
-  <p>
-    Hello guys, my name is Bekzat
-  </p>
+  <h1>{{ title }}</h1>
+  <p>{{ mission }}</p>
 
-  <h2>Contacts</h2>
-  <ul>
-    <li>Email: b_saparbek&#64;kbtu.kz</li>
-    <li>Telegram: &#64;saparbekoovvv</li>
-    <li>GitHub: <a href="https://github.com/Bekzat707" target="_blank">my_github</a></li>
-  </ul>
+  <img [src]="photoUrl" alt="Our Team" width="150">
+  <button [disabled]="isButtonDisabled">Disabled demo button</button>
+
+  <div class="likes">
+    <button (click)="addLike()">👍 Like</button>
+    <span>Likes: {{ likes }}</span>
+  </div>
+
+  <button (click)="toggleMessage()">Toggle Message</button>
+  <p *ngIf="showMessage">Thank you for visiting our page!</p>
+
+  <div class="greeting">
+    <input [(ngModel)]="name" placeholder="Your name">
+    <p *ngIf="name">Hello, {{ name }}!</p>
+  </div>
+
+  <div class="subscribe">
+    <input [(ngModel)]="email" placeholder="your@email.com">
+    <button (click)="subscribe()">Subscribe</button>
+    <p *ngIf="subscribed">
+      Thanks, {{ email }}, we’ll be in touch soon!
+    </p>
+  </div>
 </div>
