@@ -1,0 +1,11 @@
+<div class="movie-grid">
+    <div
+      *ngFor="let m of movies"
+      class="movie-card"
+      (click)="selectMovie.emit(m.imdbID)"
+    >
+      <img [src]="m.Poster !== 'N/A' ? m.Poster : 'https://placehold.co/150x220'" />
+      <h3>{{ m.Title }}</h3>
+      <p>{{ m.Year }}</p>
+    </div>
+  </div>

@@ -1,0 +1,11 @@
+<div class="container">
+  <h2>🎬 Movies List</h2>
+  <button (click)="loadMovies()">Load Movies</button>
+
+  <ul *ngIf="isLoaded">
+    <li *ngFor="let movie of movies">
+      <strong>{{ movie.title }}</strong> ({{ movie.release_date }})
+      <p>{{ movie.description }}</p>
+    </li>
+  </ul>
+</div>

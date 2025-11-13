@@ -1,0 +1,12 @@
+<div *ngIf="movie" class="details-card">
+    <h2>{{ movie.Title }}</h2>
+    <img [src]="movie.Poster" alt="Poster" width="200" />
+    <p><strong>Year:</strong> {{ movie.Year }}</p>
+    <p><strong>Genre:</strong> {{ movie.Genre }}</p>
+    <p><strong>Director:</strong> {{ movie.Director }}</p>
+    <p><strong>Actors:</strong> {{ movie.Actors }}</p>
+    <p><strong>Plot:</strong> {{ movie.Plot }}</p>
+    <a [href]="'https://www.imdb.com/title/' + movie.imdbID" target="_blank">
+      View on IMDb ↗
+    </a>
+  </div>
