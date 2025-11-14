@@ -1,0 +1,21 @@
+.navbar {
+    display: flex;
+    gap: 20px;
+    padding: 15px;
+    background: #222;
+  }
+  
+  .navbar a {
+    color: white;
+    text-decoration: none;
+    font-size: 18px;
+  }
+  
+  a.active {
+    font-weight: bold;
+    color: yellow;
+  }
+  
+  hr {
+    margin-top: 10px;
+  }

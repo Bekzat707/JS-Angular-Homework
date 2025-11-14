@@ -1,15 +1,15 @@
 import { Routes } from '@angular/router';
 import { HomeComponent } from './components/home/home.component';
 import { AboutComponent } from './components/about/about.component';
-import { MovieListComponent } from './components/movie-list/movie-list.component';
-import { MovieDetailComponent } from './components/movie-detail/movie-detail.component';
 import { LoginComponent } from './components/login/login.component';
+import { ItemsListComponent } from './components/items-list/items-list.component';
+import { ItemDetailsComponent } from './components/item-details/item-details.component';
 
 export const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'about', component: AboutComponent },
-  { path: 'items', component: MovieListComponent },
-  { path: 'items/:id', component: MovieDetailComponent },
   { path: 'login', component: LoginComponent },
+  { path: 'items', component: ItemsListComponent },
+  { path: 'items/:id', component: ItemDetailsComponent },
   { path: '**', redirectTo: '' }
 ];

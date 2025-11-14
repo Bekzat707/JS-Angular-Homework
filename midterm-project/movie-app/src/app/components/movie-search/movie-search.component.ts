@@ -1,8 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { MovieService } from '../../services/movie.service';
-import { Subject, debounceTime, distinctUntilChanged, switchMap } from 'rxjs';
+import { MoviesService } from '../../services/movie.service';
+import { Subject, debounceTime, distinctUntilChanged, switchMap, firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-movie-search',
@@ -25,31 +25,29 @@ export class MovieSearchComponent implements OnInit {
 
   categories = ['All', 'Action', 'Comedy', 'Drama', 'Horror', 'Sci-Fi', 'Romance'];
 
-  constructor(private movieService: MovieService) {}
+  constructor(private moviesService: MoviesService) {}
 
   ngOnInit() {
     this.searchSubject.pipe(
       debounceTime(500),
       distinctUntilChanged(),
-      switchMap(query => this.movieService.searchMovies(query, 1))
-    ).subscribe((res: any) => {
-      this.movies = res.Search || [];
+      switchMap(query => this.moviesService.getMovies(query)) // ✅ дұрыс қызмет шақыру
+    ).subscribe((res: any[]) => {
+      this.movies = res || [];
       this.filteredMovies = [...this.movies];
-      this.hasMore = !!res.totalResults && this.page * 10 < +res.totalResults;
       this.loading = false;
+      this.hasMore = this.movies.length >= 10;
     });
 
     this.fetchTopMovies();
   }
 
-  fetchTopMovies() {
+  async fetchTopMovies() {
     const popularTitles = ['Inception', 'Interstellar', 'Joker', 'The Dark Knight', 'Avatar'];
-    Promise.all(popularTitles.map(title => this.movieService.searchMovies(title, 1).toPromise()))
-      .then(results => {
-        this.topMovies = results
-          .map(r => r?.Search?.[0])
-          .filter(Boolean);
-      });
+    const results = await Promise.all(
+      popularTitles.map(title => firstValueFrom(this.moviesService.getMovies(title)))
+    );
+    this.topMovies = results.map(r => r[0]).filter(Boolean); // тек бірінші фильм
   }
 
   search() {
@@ -93,10 +91,10 @@ export class MovieSearchComponent implements OnInit {
 
   fetchMovies(term: string) {
     this.loading = true;
-    this.movieService.searchMovies(term, this.page).subscribe((res: any) => {
-      this.movies = res.Search || [];
+    this.moviesService.getMovies(term).subscribe((res: any[]) => {
+      this.movies = res || [];
       this.filteredMovies = [...this.movies];
-      this.hasMore = !!res.totalResults && this.page * 10 < +res.totalResults;
+      this.hasMore = this.movies.length >= 10;
       this.loading = false;
     });
   }

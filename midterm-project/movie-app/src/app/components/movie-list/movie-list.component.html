@@ -1,11 +1,15 @@
+<div class="search-bar">
+  <input [(ngModel)]="query" placeholder="Search movies..." />
+  <button (click)="onSearch()">Search</button>
+</div>
+
+<div *ngIf="loading">Loading...</div>
+<div *ngIf="error">{{ error }}</div>
+
 <div class="movie-grid">
-    <div
-      *ngFor="let m of movies"
-      class="movie-card"
-      (click)="selectMovie.emit(m.imdbID)"
-    >
-      <img [src]="m.Poster !== 'N/A' ? m.Poster : 'https://placehold.co/150x220'" />
-      <h3>{{ m.Title }}</h3>
-      <p>{{ m.Year }}</p>
-    </div>
+  <div class="movie-card" *ngFor="let movie of movies" (click)="goToDetails(movie.imdbID)">
+    <img [src]="movie.Poster !== 'N/A' ? movie.Poster : 'https://placehold.co/150x220'" alt="{{ movie.Title }}" />
+    <h3>{{ movie.Title }}</h3>
+    <p>{{ movie.Year }}</p>
   </div>
+</div>

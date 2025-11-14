@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "project": {
+    "hw6-routes": {
       "projectType": "application",
       "schematics": {},
       "root": "",
@@ -13,7 +13,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:application",
           "options": {
-            "outputPath": "dist/project",
+            "outputPath": "dist/hw6-routes",
             "index": "src/index.html",
             "browser": "src/main.ts",
             "polyfills": [
@@ -59,10 +59,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "buildTarget": "project:build:production"
+              "buildTarget": "hw6-routes:build:production"
             },
             "development": {
-              "buildTarget": "project:build:development"
+              "buildTarget": "hw6-routes:build:development"
             }
           },
           "defaultConfiguration": "development"
