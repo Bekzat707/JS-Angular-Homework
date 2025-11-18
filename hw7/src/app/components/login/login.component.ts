@@ -12,6 +12,7 @@ import { AuthService } from '../../services/auth.service';
   styleUrls: ['./login.component.css'],
   imports: [CommonModule, FormsModule, RouterModule]
 })
+
 export class LoginComponent {
   email = '';
   password = '';
