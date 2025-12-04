@@ -1,0 +1,187 @@
+/* ===== Global Reset ===== */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* ===== Body ===== */
+body {
+  font-family: "Inter", system-ui, -apple-system, BlinkMacSystemFont, sans-serif;
+  background: linear-gradient(135deg, #ecfdf5, #f8fafc);
+  color: #0f172a;
+  line-height: 1.6;
+  min-height: 100vh;
+}
+
+/* ===== Navbar ===== */
+.navbar {
+  background: linear-gradient(135deg, #065f46, #0f766e);
+  color: white;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.1rem 2.5rem;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.18);
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  border-radius: 0 0 20px 20px;
+}
+
+.navbar a {
+  color: white;
+  text-decoration: none;
+  margin-left: 1.3rem;
+  font-weight: 600;
+  letter-spacing: 0.3px;
+  transition: all 0.25s ease;
+}
+
+.navbar a:hover {
+  opacity: 0.9;
+  transform: translateY(-1px);
+}
+
+.navbar a.active {
+  border-bottom: 2px solid #34d399;
+  padding-bottom: 3px;
+}
+
+/* ===== Container ===== */
+.container {
+  max-width: 1200px;
+  margin: 50px auto;
+  padding: 0 20px;
+}
+
+/* ===== Home Page ===== */
+.home {
+  text-align: center;
+  background: white;
+  padding: 50px 40px;
+  border-radius: 22px;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.08);
+  animation: fadeIn 0.8s ease;
+}
+
+.home h1 {
+  color: #065f46;
+  font-size: 2.4rem;
+  font-weight: 700;
+}
+
+.home p {
+  margin-top: 16px;
+  font-size: 1.1rem;
+  color: #475569;
+  max-width: 700px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.home img {
+  width: 85%;
+  max-width: 650px;
+  border-radius: 18px;
+  margin-top: 30px;
+  box-shadow: 0 12px 28px rgba(0, 0, 0, 0.18);
+  transition: transform 0.35s ease;
+}
+
+.home img:hover {
+  transform: scale(1.06);
+}
+
+/* ===== Items Grid ===== */
+.items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
+  gap: 26px;
+  margin-top: 25px;
+}
+
+/* ===== Item Card ===== */
+.item-card {
+  background: white;
+  border-radius: 22px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.07);
+  padding: 18px;
+  display: flex;
+  flex-direction: column;
+  transition: all 0.35s ease;
+  overflow: hidden;
+}
+
+.item-card:hover {
+  transform: translateY(-10px) scale(1.01);
+  box-shadow: 0 18px 45px rgba(0, 0, 0, 0.18);
+}
+
+.item-card img {
+  width: 100%;
+  border-radius: 16px;
+  margin-bottom: 14px;
+  object-fit: cover;
+}
+
+.item-card h3 {
+  color: #065f46;
+  font-size: 1.25rem;
+  margin-bottom: 8px;
+}
+
+.item-card p {
+  font-size: 0.95rem;
+  color: #64748b;
+}
+
+/* ===== Buttons ===== */
+button {
+  background: linear-gradient(135deg, #065f46, #0f766e);
+  border: none;
+  color: white;
+  padding: 10px 20px;
+  border-radius: 12px;
+  font-size: 0.95rem;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 20px rgba(6, 95, 70, 0.45);
+}
+
+/* ===== Animations ===== */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(12px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* ===== Adaptive ===== */
+@media (max-width: 768px) {
+  .navbar {
+    flex-direction: column;
+    gap: 10px;
+    padding: 1rem 1.5rem;
+  }
+
+  .navbar a {
+    margin: 0.4rem 0;
+  }
+
+  .home {
+    padding: 35px 22px;
+  }
+
+  .home h1 {
+    font-size: 1.9rem;
+  }
+}
