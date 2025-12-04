@@ -1,0 +1,52 @@
+.items-list,
+.items-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 28px;
+  margin-top: 30px;
+  animation: fadeIn 0.6s ease;
+}
+
+.search-container {
+  margin-bottom: 30px;
+  text-align: center;
+}
+
+.search-container input {
+  padding: 14px 20px;
+  border-radius: 12px;
+  border: 2px solid #e5e5e5;
+  font-size: 1rem;
+  width: 100%;
+  max-width: 500px;
+  transition: all 0.3s ease;
+  background: #f8f8f8;
+  color: #000000;
+}
+
+.search-container input:focus {
+  outline: none;
+  border-color: #000000;
+  background: #ffffff;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+h2 {
+  color: #000000;
+  font-weight: 800;
+  font-size: 2.2rem;
+  margin-bottom: 20px;
+  letter-spacing: -0.5px;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}

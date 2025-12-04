@@ -1,0 +1,54 @@
+<div class="item-details">
+  <div *ngIf="loading$ | async" class="loading">Loading item...</div>
+
+  <div *ngIf="(error$ | async) as err" class="error">
+    Error loading item: {{ err?.message || err | json }}
+  </div>
+
+  <div *ngIf="(item$ | async) as item" class="item-content">
+    <h2>{{ item.title }}</h2>
+    <img *ngIf="item.thumbnail" [src]="item.thumbnail" [alt]="item.title" />
+    <p>{{ item.description }}</p>
+    <button (click)="goBack()">← Back to Items</button>
+  </div>
+</div>
+
+<style>
+  .loading,
+  .error {
+    text-align: center;
+    padding: 30px;
+    border-radius: 12px;
+    margin: 20px 0;
+    font-weight: 600;
+    font-size: 1.1rem;
+  }
+
+  .loading {
+    background: #f8f8f8;
+    color: #2d2d2d;
+    border: 2px solid #e5e5e5;
+  }
+
+  .error {
+    background: #f8f8f8;
+    color: #000000;
+    border-left: 4px solid #000000;
+  }
+
+  .item-content {
+    animation: fadeIn 0.6s ease;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+</style>

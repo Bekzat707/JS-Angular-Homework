@@ -1,0 +1,279 @@
+<div class="container">
+  <div class="profile-container" *ngIf="user$ | async as user; else loading">
+    <h2>My Profile</h2>
+
+    <div class="profile-card">
+      <div class="profile-picture-section">
+        <img
+          [src]="(profile$ | async)?.photoURL || 'https://ui-avatars.com/api/?name=' + (user.email || 'User') + '&size=200&background=000&color=fff&bold=true'"
+          alt="Profile Picture" class="profile-picture" />
+
+        <div class="upload-controls">
+          <label for="file-upload" class="file-upload-label">
+            📸 Upload Profile Picture
+          </label>
+          <input id="file-upload" type="file" (change)="onFileSelected($event)" accept="image/png, image/jpeg"
+            [disabled]="uploading" style="display: none;" />
+          <p *ngIf="uploading" class="uploading-text">⏳ Uploading... Please wait.</p>
+          <p *ngIf="uploadError" class="error">{{ uploadError }}</p>
+        </div>
+      </div>
+
+      <div class="profile-info">
+        <div class="info-card">
+          <div class="info-label">📧 Email</div>
+          <div class="info-value">{{ user.email }}</div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-label">🆔 User ID</div>
+          <div class="info-value">{{ user.uid }}</div>
+        </div>
+
+        <div class="info-card">
+          <div class="info-label">✅ Email Verified</div>
+          <div class="info-value">{{ user.emailVerified ? 'Yes' : 'No' }}</div>
+        </div>
+
+        <div class="info-card" *ngIf="user.metadata">
+          <div class="info-label">📅 Account Created</div>
+          <div class="info-value">{{ user.metadata.creationTime | date:'medium' }}</div>
+        </div>
+
+        <div class="info-card" *ngIf="user.metadata">
+          <div class="info-label">🕐 Last Sign In</div>
+          <div class="info-value">{{ user.metadata.lastSignInTime | date:'medium' }}</div>
+        </div>
+      </div>
+
+      <div class="actions">
+        <button class="logout-btn" (click)="logout()">🚪 Logout</button>
+      </div>
+    </div>
+  </div>
+</div>
+
+<ng-template #loading>
+  <div class="loading-container">
+    <p>⏳ Loading user info...</p>
+  </div>
+</ng-template>
+
+<style>
+  .container {
+    max-width: 800px;
+    margin: 40px auto;
+    padding: 0 20px;
+  }
+
+  .profile-container {
+    animation: fadeIn 0.6s ease;
+  }
+
+  h2 {
+    color: #000000;
+    font-weight: 800;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    text-align: center;
+    letter-spacing: -1px;
+  }
+
+  .profile-card {
+    background: #ffffff;
+    border-radius: 24px;
+    box-shadow: 0 12px 48px rgba(0, 0, 0, 0.24);
+    padding: 40px;
+    border: 1px solid rgba(0, 0, 0, 0.05);
+  }
+
+  .profile-picture-section {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 2px solid #e5e5e5;
+  }
+
+  .profile-picture {
+    width: 200px;
+    height: 200px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 24px;
+    border: 5px solid #000000;
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+  }
+
+  .profile-picture:hover {
+    transform: scale(1.08) rotate(2deg);
+    box-shadow: 0 16px 48px rgba(0, 0, 0, 0.4);
+  }
+
+  .upload-controls {
+    text-align: center;
+    width: 100%;
+  }
+
+  .file-upload-label {
+    display: inline-block;
+    padding: 14px 32px;
+    background: #000000;
+    color: #ffffff;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 1rem;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    letter-spacing: 0.5px;
+  }
+
+  .file-upload-label:hover {
+    background: #1a1a1a;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+
+  .file-upload-label:active {
+    transform: translateY(0);
+  }
+
+  .uploading-text {
+    margin-top: 16px;
+    font-size: 1rem;
+    color: #2d2d2d;
+    font-weight: 600;
+    animation: pulse 1.5s ease-in-out infinite;
+  }
+
+  .error {
+    color: #000000;
+    background: #f8f8f8;
+    padding: 14px;
+    border-radius: 10px;
+    margin-top: 16px;
+    border-left: 4px solid #000000;
+    font-weight: 600;
+    font-size: 0.95rem;
+  }
+
+  .profile-info {
+    display: grid;
+    gap: 16px;
+    margin-bottom: 30px;
+  }
+
+  .info-card {
+    background: #f8f8f8;
+    border-radius: 12px;
+    padding: 20px;
+    border-left: 4px solid #000000;
+    transition: all 0.3s ease;
+  }
+
+  .info-card:hover {
+    background: #ffffff;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.1);
+    transform: translateX(4px);
+  }
+
+  .info-label {
+    font-size: 0.85rem;
+    color: #666;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    margin-bottom: 8px;
+  }
+
+  .info-value {
+    font-size: 1.1rem;
+    color: #000000;
+    font-weight: 600;
+    word-break: break-all;
+  }
+
+  .actions {
+    display: flex;
+    justify-content: center;
+    margin-top: 30px;
+  }
+
+  .logout-btn {
+    background: #000000;
+    color: #ffffff;
+    border: none;
+    padding: 16px 48px;
+    border-radius: 12px;
+    font-size: 1.1rem;
+    font-weight: 700;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    letter-spacing: 0.5px;
+  }
+
+  .logout-btn:hover {
+    background: #1a1a1a;
+    transform: translateY(-2px);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+  }
+
+  .logout-btn:active {
+    transform: translateY(0);
+  }
+
+  .loading-container {
+    text-align: center;
+    padding: 60px 20px;
+    font-size: 1.2rem;
+    color: #2d2d2d;
+    font-weight: 600;
+  }
+
+  @keyframes fadeIn {
+    from {
+      opacity: 0;
+      transform: translateY(20px);
+    }
+
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  @keyframes pulse {
+
+    0%,
+    100% {
+      opacity: 1;
+    }
+
+    50% {
+      opacity: 0.6;
+    }
+  }
+
+  @media (max-width: 768px) {
+    .profile-card {
+      padding: 24px;
+    }
+
+    .profile-picture {
+      width: 150px;
+      height: 150px;
+    }
+
+    h2 {
+      font-size: 2rem;
+    }
+
+    .info-value {
+      font-size: 0.95rem;
+    }
+  }
+</style>

@@ -1,0 +1,49 @@
+<h2>My Favorites</h2>
+
+<div *ngIf="loading">Loading favorites...</div>
+
+<div *ngIf="(favoritesItems$ | async) as items">
+  <div *ngIf="items.length === 0 && !loading">
+    <p>You have no items in your favorites list.</p>
+  </div>
+
+  <ul class="items-list">
+    <li *ngFor="let item of items">
+      <a [routerLink]="['/items', item.id]">
+        <app-item-card [item]="item"></app-item-card>
+      </a>
+    </li>
+  </ul>
+</div>
+
+<style>
+  .items-list {
+    list-style: none;
+    padding: 0;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 28px;
+  }
+
+  .items-list li a {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  h2 {
+    color: #000000;
+    font-weight: 800;
+    font-size: 2.5rem;
+    margin-bottom: 30px;
+    text-align: center;
+    letter-spacing: -1px;
+  }
+
+  div[class*="loading"],
+  div p {
+    text-align: center;
+    padding: 20px;
+    color: #2d2d2d;
+    font-size: 1.1rem;
+  }
+</style>

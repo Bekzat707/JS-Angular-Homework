@@ -1,0 +1,24 @@
+<app-navbar></app-navbar>
+
+<div *ngIf="!isOnline" class="offline-message">
+  You are currently offline. Some features may not be available.
+</div>
+
+<router-outlet></router-outlet>
+
+<style>
+  .offline-message {
+    background: linear-gradient(135deg, #000000 0%, #1a1a1a 100%);
+    color: #ffffff;
+    text-align: center;
+    padding: 14px 20px;
+    font-weight: 700;
+    position: sticky;
+    top: 0;
+    z-index: 1001;
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+    letter-spacing: 0.5px;
+    font-size: 0.95rem;
+    border-bottom: 2px solid #ffffff;
+  }
+</style>
